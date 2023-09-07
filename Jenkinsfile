@@ -29,6 +29,7 @@ pipeline {
 				script {
 					echo "deploying the application..."
 				}
+			}
 		}
 	}
 }
