@@ -20,7 +20,6 @@ pipeline {
 						sh 'docker build -t ryan02/demo-app:jma-2.0 .'
 						sh 'echo $PASS | docker login -u $USER --password-stdin'
 						sh 'docker push ryan02/demo-app:jma-2.0'
-				          }
 				}
 			}
 		}
