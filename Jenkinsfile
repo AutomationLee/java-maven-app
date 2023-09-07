@@ -16,7 +16,7 @@ pipeline {
 			steps {
 				script {
 					echo "building the application..."
-					withCredentials([usernamePassword(credentialsID: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsID: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')])
 						sh 'docker build -t ryan02/demo-app:jma-2.0 .'
 						sh 'echo $PASS | docker login -u $USER --password-stdin'
 						sh 'docker push ryan02/demo-app:jma-2.0'
@@ -29,7 +29,6 @@ pipeline {
 				script {
 					echo "deploying the application..."
 				}
-			}
 		}
 	}
 }
