@@ -1,5 +1,8 @@
 pipeline {     // testing for webhooks trigger
 	agent any
+	environment {
+        GITHUB_CREDENTIALS = credentials('GithubAccesstoken') // Use the ID you set in step 2
+        }
 	tools {        // access build tools
 		maven 'maven-3.9.4'
 	}	
