@@ -38,7 +38,7 @@ pipeline {     // testing for webhooks trigger
 					withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 						sh "docker build -t ryan02/demo-app:$IMAGE_NAME ."
 						sh 'echo $PASS | docker login -u $USER --password-stdin'
-						sh 'docker push ryan02/demo-app:$IMAGE_NAME'
+						sh "docker push ryan02/demo-app:${IMAGE_NAME}"
 				       }
 				}
 			}
