@@ -15,6 +15,14 @@ pipeline {     // testing for webhooks trigger
 				}
 			}
 		}
+		stage("build app") {
+			steps {
+				script {
+					echo "building the application..."
+					sh 'mvn clean'
+				}
+			}
+		}
 		stage("build jar") {
 			steps {
 				script {
