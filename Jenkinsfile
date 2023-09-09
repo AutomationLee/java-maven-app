@@ -54,7 +54,7 @@ pipeline {     // testing for webhooks trigger
 		stage("commit version update") {
 			steps {
 				script {
-					withCredentials([usernamePassword(credentialsId: 'GithubAccesstoken', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 					    sh 'git config --global user.email "ryan@jenkinsexample.com"'
 				            sh 'git config --global user.name "jenkins"'
 					    sh 'git status'
