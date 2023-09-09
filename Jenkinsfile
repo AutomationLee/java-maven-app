@@ -62,7 +62,8 @@ pipeline {     // testing for webhooks trigger
 					    sh 'git branch'
 					    sh 'git config --list'
 
-					    sh "git remote set-url origin https://${USER}:${encodedPassword}@github.com/AutomationLee/java-maven-app.git"
+					    sh 'git rm origin'
+					    sh "git remote set-url origin https://AutomationLee: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@github.com/AutomationLee/java-maven-app.git"
 					    sh 'git add .'
 					    sh 'git commit -m "ci: version changed and added back in git"'
 					    sh 'git push origin HEAD:main' 
