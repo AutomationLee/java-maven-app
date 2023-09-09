@@ -64,7 +64,7 @@ pipeline {     // testing for webhooks trigger
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/AutomationLee/java-maven-app.git"
                         sh 'git add .'
                         sh 'git commit -m "pom updated"'
-                        sh 'git push origin HEAD:main'
+                        sh "git push https://${USER}:${PASS}@github.com/AutomationLee/java-maven-app.git HEAD:main"
                     }
                 }
             }
