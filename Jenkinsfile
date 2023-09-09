@@ -55,6 +55,12 @@ pipeline {     // testing for webhooks trigger
 			steps {
 				script {
 					withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					    sh 'git config --global user.email "ryan@jenkinsexample.com"'
+				            sh 'git config --global user.name "jenkins"'
+					    sh 'git status'
+					    sh 'git branch'
+					    sh 'git config --list'
+						
 					    sh 'git remote set url origin https://${USER:${PASS}:@github.com/AutomationLee/java-maven-app.git'
 					    sh 'git add .'
 					    sh 'git commit -m "ci: version changed and added back in git"'
