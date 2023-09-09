@@ -4,6 +4,14 @@ pipeline {     // testing for webhooks trigger
 		maven 'maven-3.9.4'
 	}	
 	stages {
+		stage("increment version") {
+			steps {
+				script {
+					echo 'incrementing app version...'
+					sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.\\\${parsedVersion.incrementalVersion} versions:commit'
+				}
+			}
+		}
 		stage("build jar") {
 			steps {
 				script {
