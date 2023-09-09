@@ -1,8 +1,5 @@
 pipeline {     // testing for webhooks trigger
 	agent any
-	environment {
-        GITHUB_CREDENTIALS = credentials('GithubAccesstoken') // Use the ID you set in step 2
-        }
 	tools {        // access build tools
 		maven 'maven-3.9.4'
 	}	
@@ -57,14 +54,13 @@ pipeline {     // testing for webhooks trigger
 		stage("commit version update") {
 			steps {
 				script {
-					withCredentials([usernamePassword(credentialsId: 'GithubAccesstoken', variable: 'TEST')]) {
+					withCredentials([usernamePassword(credentialsId: 'GithubAccesstoken', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 					    sh 'git config --global user.email "ryan@jenkinsexample.com"'
 				            sh 'git config --global user.name "jenkins"'
 					    sh 'git status'
 					    sh 'git branch'
 					    sh 'git config --list'
 
-					    sh 'git rm origin'
 					    sh 'git remote set-url origin https://${USER:${PASS}@github.com/AutomationLee/java-maven-app.git'    
 					    sh 'git add .'
 					    sh 'git commit -m "ci: version changed and added back in git"'
