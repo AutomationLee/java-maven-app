@@ -50,24 +50,23 @@ pipeline {     // testing for webhooks trigger
 				}
 			}
 		}
+        stage('commit version update'){
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                        sh 'git config --global user.email "jenkins@example.com"'
+                        sh 'git config --global user.name "jenkins"'
 
-		stage("commit version update") {
-			steps {
-				script {
-					withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-					    sh 'git config --global user.email "ryan@jenkinsexample.com"'
-				            sh 'git config --global user.name "jenkins"'
-					    sh 'git status'
-					    sh 'git branch'
-					    sh 'git config --list'
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
 
-					    sh 'git remote set-url origin https://${USER:${PASS}@github.com/AutomationLee/java-maven-app.git'    
-					    sh 'git add .'
-					    sh 'git commit -m "ci: version changed and added back in git"'
-					    sh 'git push origin HEAD:main' 
-					}
-				}
-			}
-		}
-	}
+                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/AutomationLee/java-maven-app.git"
+                        sh 'git add .'
+                        sh 'git commit -m "pom updated"'
+                        sh 'git push origin HEAD:main'
+                    }
+                }
+            }
+        }
 }
