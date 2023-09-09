@@ -50,5 +50,18 @@ pipeline {     // testing for webhooks trigger
 				}
 			}
 		}
+
+		stage("commit version update") {
+			steps {
+				script {
+					withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					    sh 'git remote set url origin https://${USER:${PASS}:@github.com/AutomationLee/java-maven-app.git'
+					    sh 'git add .'
+					    sh 'git commit -m "ci: version changed and added back in git"'
+					    sh 'git push origin HEAD:main'
+					}
+				}
+			}
+		}
 	}
 }
