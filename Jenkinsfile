@@ -54,7 +54,7 @@ pipeline {     // testing for webhooks trigger
 		stage("commit version update") {
 			steps {
 				script {
-					withCredentials([usernamePassword(credentialsId: 'LeeAutomation', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsId: 'GithubAccesstoken', variable: 'TEST')]) {
 				            def encodedPassword = URLEncoder.encode("$PASS",'UTF-8')
 					    sh 'git config --global user.email "ryan@jenkinsexample.com"'
 				            sh 'git config --global user.name "jenkins"'
@@ -62,7 +62,8 @@ pipeline {     // testing for webhooks trigger
 					    sh 'git branch'
 					    sh 'git config --list'
 
-					    sh "git remote set-url origin https://AutomationLee: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@github.com/AutomationLee/java-maven-app.git"
+					    sh 'git rm origin'	
+					    sh "git remote set-url origin https://AutomationLee:${TEST}@github.com/AutomationLee/java-maven-app.git"
 					    sh 'git add .'
 					    sh 'git commit -m "ci: version changed and added back in git"'
 					    sh 'git push origin HEAD:main' 
